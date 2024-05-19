@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>509</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Library Cataloger</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(27, 23, 38);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(27, 23, 38);</string>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(23, 20, 33);
+color: #FFFFFF;</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>4</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="KnowledgeBranch">
+       <attribute name="title">
+        <string>KnowledgeBranch</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QTableView" name="tableView"/>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="deleteButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(192, 28, 40);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(214, 31, 43);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Удалить</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(129, 61, 156);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(146, 69, 176);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Редактировать...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(38, 162, 105);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(44, 186, 119);
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Добавить...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Science">
+       <attribute name="title">
+        <string>Science</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTableView" name="tableView_2"/>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QPushButton" name="deleteButton_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(192, 28, 40);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(214, 31, 43);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Удалить</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editButton_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(129, 61, 156);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(146, 69, 176);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Редактировать...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addButton_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(38, 162, 105);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(44, 186, 119);
+}</string>
+             </property>
+             <property name="text">
+              <string>Добавить...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Author">
+       <attribute name="title">
+        <string>Author</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QTableView" name="tableView_3"/>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QPushButton" name="deleteButton_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(192, 28, 40);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(214, 31, 43);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Удалить</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editButton_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(129, 61, 156);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(146, 69, 176);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Редактировать...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addButton_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(38, 162, 105);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(44, 186, 119);
+}</string>
+             </property>
+             <property name="text">
+              <string>Добавить...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Article">
+       <attribute name="title">
+        <string>Article</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QTableView" name="tableView_4"/>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QPushButton" name="deleteButton_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(192, 28, 40);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(214, 31, 43);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Удалить</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editButton_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(129, 61, 156);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(146, 69, 176);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Редактировать...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addButton_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(38, 162, 105);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(44, 186, 119);
+}</string>
+             </property>
+             <property name="text">
+              <string>Добавить...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Monography">
+       <attribute name="title">
+        <string>Monography</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QTableView" name="tableView_5"/>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QPushButton" name="deleteButton_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(192, 28, 40);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(214, 31, 43);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Удалить</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="editButton_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(129, 61, 156);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(146, 69, 176);
+}
+QPushButton:disabled {
+	background-color: rgb(154, 153, 150);
+	color: rgb(61, 61, 61);
+}</string>
+             </property>
+             <property name="text">
+              <string>Редактировать...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addButton_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+	background-color: rgb(38, 162, 105);
+	border-radius: 3px;
+	height: 35px;
+}
+QPushButton:hover {
+	background-color: rgb(44, 186, 119);
+}</string>
+             </property>
+             <property name="text">
+              <string>Добавить...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
