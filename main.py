@@ -10,6 +10,7 @@ from db import Database, KnowledgeBranchTable, ScienceTable, AuthorTable, Articl
 from utils import MainWindowUtils
 
 from ui_components.ui_mainwindow import Ui_MainWindow
+from ui_components.ui_auth import Ui_Dialog as Ui_Auth_Dialog
 from ui_components.ui_create_knowledgebranch import Ui_Dialog as Ui_CreateKnowledgeBranch_Dialog
 from ui_components.ui_modify_knowledgebranch import Ui_Dialog as Ui_ModifyKnowledgeBranch_Dialog
 from ui_components.ui_create_science import Ui_Dialog as Ui_CreateScience_Dialog
@@ -23,14 +24,34 @@ from ui_components.ui_modify_monography import Ui_Dialog as Ui_ModifyMonography_
 
 
 
+class AuthDialog(QDialog):
+    def __init__(self) -> None:
+        super().__init__()
+        self.ui = Ui_Auth_Dialog()
+        self.ui.setupUi(self)
+
+        self.ui.addButton_6.clicked.connect(self.auth_to_database)
+
+    
+    def auth_to_database(self):
+        self.db = Database(
+            self.ui.lineEdit.text().strip(),
+            self.ui.lineEdit_3.text().strip()
+        )
+        if self.db.conn.isOpen():
+            self.accept()
+        else:
+            self.ui.lineEdit.setText("")
+            self.ui.lineEdit_3.setText("")
+
+
 
 class LibraryCataloger(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.db = Database()
-
+        self.db = Database
         self.ui.tabWidget.currentChanged.connect(self.on_tab_changed)
 
         MainWindowUtils.make_tabs_current_consistently(self.ui)
@@ -78,6 +99,7 @@ class LibraryCataloger(QMainWindow):
         model = QSqlQueryModel(self)
         model.setQuery(databaseTableObj.get_all())
         tableViewObj.setModel(model)
+        tableViewObj.setColumnHidden(0, True)
         tableViewObj.setSelectionMode(QTableView.SingleSelection)
         tableViewObj.setSelectionBehavior(QTableView.SelectRows)
         tableViewObj.selectionModel().selectionChanged.connect(self.change_delete_update_button_states)
@@ -284,37 +306,37 @@ class ModifyDialog(QDialog):
             case Ui_ModifyKnowledgeBranch_Dialog():
                 result = KnowledgeBranchTable.modify(
                     self.record_id_value,
-                    self.ui.lineEdit.text(),
-                    self.ui.lineEdit_3.text(),
-                    self.ui.dateEdit.date().toString("yyyy-MM-dd"),
-                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd")
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.lineEdit_3.text().strip(),
+                    self.ui.dateEdit.date().toString("yyyy-MM-dd").strip(),
+                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd").strip()
                 )
                 self.complete_modifying_process(result)
             case Ui_ModifyScience_Dialog():
                 result = ScienceTable.modify(
                     self.record_id_value,
-                    self.ui.lineEdit.text(),
-                    self.ui.lineEdit_3.text(),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.lineEdit_3.text().strip(),
                     self.ui.comboBox.record_ids[self.ui.comboBox.currentIndex()],
-                    self.ui.dateEdit.date().toString("yyyy-MM-dd"),
-                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd")
+                    self.ui.dateEdit.date().toString("yyyy-MM-dd").strip(),
+                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd").strip()
                 )
                 self.complete_modifying_process(result)
             case Ui_ModifyAuthor_Dialog():
                 result = AuthorTable.modify(
                     self.record_id_value,
-                    self.ui.lineEdit.text(),
-                    self.ui.lineEdit_3.text(),
-                    self.ui.lineEdit_4.text(),
-                    self.ui.dateEdit.date().toString("yyyy-MM-dd"),
-                    self.ui.lineEdit_5.text()
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.lineEdit_3.text().strip(),
+                    self.ui.lineEdit_4.text().strip(),
+                    self.ui.dateEdit.date().toString("yyyy-MM-dd").strip(),
+                    self.ui.lineEdit_5.text().strip()
                 )
                 self.complete_modifying_process(result)
             case Ui_ModifyArticle_Dialog():
                 result = ArticleTable.modify(
                     self.record_id_value,
-                    self.ui.lineEdit.text(),
-                    self.ui.textEdit.toPlainText(),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.textEdit.toPlainText().strip(),
                     datetime.now().strftime("%Y-%m-%d"),
                     self.ui.comboBox.record_ids[self.ui.comboBox.currentIndex()],
                     self.ui.comboBox_2.record_ids[self.ui.comboBox_2.currentIndex()]
@@ -323,8 +345,8 @@ class ModifyDialog(QDialog):
             case Ui_ModifyMonography_Dialog():
                 result = MonographyTable.modify(
                     self.record_id_value,
-                    self.ui.lineEdit.text(),
-                    self.ui.textEdit.toPlainText(),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.textEdit.toPlainText().strip(),
                     datetime.now().strftime("%Y-%m-%d"),
                     self.ui.comboBox.record_ids[self.ui.comboBox.currentIndex()],
                     self.ui.comboBox_2.record_ids[self.ui.comboBox_2.currentIndex()]
@@ -405,44 +427,44 @@ class CreateDialog(QDialog):
         match self.ui:
             case Ui_CreateKnowledgeBranch_Dialog():
                 result = KnowledgeBranchTable.create(
-                    self.ui.lineEdit.text(),
-                    self.ui.lineEdit_3.text(),
-                    self.ui.dateEdit.date().toString("yyyy-MM-dd"),
-                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd")
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.lineEdit_3.text().strip(),
+                    self.ui.dateEdit.date().toString("yyyy-MM-dd").strip(),
+                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd").strip()
                 )
                 self.complete_creation_process(result)
             case Ui_CreateScience_Dialog():
                 result = ScienceTable.create(
-                    self.ui.lineEdit.text(),
-                    self.ui.lineEdit_3.text(),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.lineEdit_3.text().strip(),
                     self.ui.comboBox.record_ids[self.ui.comboBox.currentIndex()],
-                    self.ui.dateEdit.date().toString("yyyy-MM-dd"),
-                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd")
+                    self.ui.dateEdit.date().toString("yyyy-MM-dd").strip(),
+                    self.ui.dateEdit_2.date().toString("yyyy-MM-dd").strip()
                 )
                 self.complete_creation_process(result)
             case Ui_CreateAuthor_Dialog():
                 result = AuthorTable.create(
-                    self.ui.lineEdit.text(),
-                    self.ui.lineEdit_3.text(),
-                    self.ui.dateEdit.date().toString("yyyy-MM-dd"),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.lineEdit_3.text().strip(),
+                    self.ui.dateEdit.date().toString("yyyy-MM-dd").strip(),
                     self.ui.lineEdit_4.text() if bool(self.ui.lineEdit_4.text().strip()) else None,
                     self.ui.lineEdit_5.text() if bool(self.ui.lineEdit_5.text().strip()) else None,
                 )
                 self.complete_creation_process(result)
             case Ui_CreateArticle_Dialog():
                 result = ArticleTable.create(
-                    self.ui.lineEdit.text(),
-                    self.ui.textEdit.toPlainText(),
-                    datetime.now().strftime("%Y-%m-%d"),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.textEdit.toPlainText().strip(),
+                    datetime.now().strftime("%Y-%m-%d").strip(),
                     self.ui.comboBox.record_ids[self.ui.comboBox.currentIndex()],
                     self.ui.comboBox_2.record_ids[self.ui.comboBox_2.currentIndex()]
                 )
                 self.complete_creation_process(result)
             case Ui_CreateMonography_Dialog():
                 result = MonographyTable.create(
-                    self.ui.lineEdit.text(),
-                    self.ui.textEdit.toPlainText(),
-                    datetime.now().strftime("%Y-%m-%d"),
+                    self.ui.lineEdit.text().strip(),
+                    self.ui.textEdit.toPlainText().strip(),
+                    datetime.now().strftime("%Y-%m-%d").strip(),
                     self.ui.comboBox.record_ids[self.ui.comboBox.currentIndex()],
                     self.ui.comboBox_2.record_ids[self.ui.comboBox_2.currentIndex()]
                 )
@@ -506,7 +528,8 @@ class DeleteController():
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = LibraryCataloger()
-    window.show()
-
+    start_window = AuthDialog()
+    if start_window.exec() == 1:
+        mainwindow = LibraryCataloger()
+        mainwindow.show()
     sys.exit(app.exec())

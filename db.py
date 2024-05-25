@@ -9,21 +9,20 @@ from config import *
 class Database(QSqlDatabase):
     conn = None
 
-    def __init__(self) -> None:
+    def __init__(self, username, password) -> None:
         super().__init__()
-        self.__connect_database()
+        self.__connect_database(username, password)
 
     @classmethod
-    def __connect_database(cls) -> None:
+    def __connect_database(cls, username, password) -> None:
         cls.conn = QSqlDatabase.addDatabase('QPSQL')
         cls.conn.setHostName(POSTGRES_HOST)
         cls.conn.setPort(POSTGRES_PORT)
         cls.conn.setDatabaseName(POSTGRES_DATABASE)
-        cls.conn.setUserName(POSTGRES_USERNAME)
-        cls.conn.setPassword(POSTGRES_PASSWORD)
+        cls.conn.setUserName(username)
+        cls.conn.setPassword(password)
         if not cls.conn.open():
-            QtWidgets.QMessageBox.critical(None, "Database connection error", "Не удалось установить соединение с базой данных.", QtWidgets.QMessageBox.Cancel)
-            sys.exit(1)
+            QtWidgets.QMessageBox.critical(None, "Database connection error", "Неверный логин или пароль.", QtWidgets.QMessageBox.Cancel)
 
     @classmethod
     def execute_query_with_parameters(cls, sql_query, *args) -> QSqlQuery:
