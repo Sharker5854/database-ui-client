@@ -35,6 +35,51 @@ class Database(QSqlDatabase):
         return query
     
     @classmethod
+    def get_all_table_accesses(cls) -> QSqlQuery:
+        return cls.execute_query_with_parameters(
+            """
+            WITH privileges AS (
+            SELECT
+            'KnowledgeBranch' AS table_name,
+            has_table_privilege(current_user, 'KnowledgeBranch', 'INSERT') AS can_insert,
+            has_table_privilege(current_user, 'KnowledgeBranch', 'UPDATE') AS can_update,
+            has_table_privilege(current_user, 'KnowledgeBranch', 'DELETE') AS can_delete
+            UNION
+            SELECT
+            'Science' AS table_name,
+            has_table_privilege(current_user, 'Science', 'INSERT') AS can_insert,
+            has_table_privilege(current_user, 'Science', 'UPDATE') AS can_update,
+            has_table_privilege(current_user, 'Science', 'DELETE') AS can_delete
+            UNION
+            SELECT
+            'Author' AS table_name,
+            has_table_privilege(current_user, 'Author', 'INSERT') AS can_insert,
+            has_table_privilege(current_user, 'Author', 'UPDATE') AS can_update,
+            has_table_privilege(current_user, 'Author', 'DELETE') AS can_delete
+            UNION
+            SELECT
+            'Article' AS table_name,
+            has_table_privilege(current_user, 'Article', 'INSERT') AS can_insert,
+            has_table_privilege(current_user, 'Article', 'UPDATE') AS can_update,
+            has_table_privilege(current_user, 'Article', 'DELETE') AS can_delete
+            UNION
+            SELECT
+            'Monography' AS table_name,
+            has_table_privilege(current_user, 'Monography', 'INSERT') AS can_insert,
+            has_table_privilege(current_user, 'Monography', 'UPDATE') AS can_update,
+            has_table_privilege(current_user, 'Monography', 'DELETE') AS can_delete
+            )
+            SELECT
+            table_name,
+            can_insert::int AS can_insert,
+            can_update::int AS can_update,
+            can_delete::int AS can_delete
+            FROM
+            privileges;
+            """
+        )
+
+    @classmethod
     def __close_connection(cls) -> None:
         cls.conn.close()
 

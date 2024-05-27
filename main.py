@@ -58,23 +58,45 @@ class LibraryCataloger(QMainWindow):
         MainWindowUtils.make_all_delete_buttons_disabled(self.ui)
         MainWindowUtils.make_all_edit_buttons_disabled(self.ui)
 
-        self.ui.deleteButton.clicked.connect(self.run_delete_controller)
-        self.ui.deleteButton_3.clicked.connect(self.run_delete_controller)
-        self.ui.deleteButton_4.clicked.connect(self.run_delete_controller)
-        self.ui.deleteButton_5.clicked.connect(self.run_delete_controller)
-        self.ui.deleteButton_6.clicked.connect(self.run_delete_controller)
+        table_accesses_query = self.db.get_all_table_accesses()
+        self.table_accesses = {}
+        for tab_index in [3, 2, 0, 4, 1]:   # SQL-query returns accesses for tables in order: Article (tab index = 3), Author (2), KnowledgeBranch (0), Monography (4), Science (1)
+            table_accesses_query.next()
+            self.table_accesses[tab_index] = {
+                "insert": int(table_accesses_query.value(1)),
+                "update": int(table_accesses_query.value(2)),
+                "delete": int(table_accesses_query.value(3))
+            }
         
+        self.ui.deleteButton.clicked.connect(self.run_delete_controller)
         self.ui.editButton.clicked.connect(self.open_modify_dialog)
-        self.ui.editButton_3.clicked.connect(self.open_modify_dialog)
-        self.ui.editButton_4.clicked.connect(self.open_modify_dialog)
-        self.ui.editButton_5.clicked.connect(self.open_modify_dialog)
-        self.ui.editButton_6.clicked.connect(self.open_modify_dialog)
-
         self.ui.addButton.clicked.connect(self.open_create_dialog)
+        if not self.table_accesses[0]["insert"]:
+            self.ui.addButton.setEnabled(False)
+
+        self.ui.deleteButton_3.clicked.connect(self.run_delete_controller)
+        self.ui.editButton_3.clicked.connect(self.open_modify_dialog)
         self.ui.addButton_3.clicked.connect(self.open_create_dialog)
+        if not self.table_accesses[1]["insert"]:
+            self.ui.addButton_3.setEnabled(False)
+
+        self.ui.deleteButton_4.clicked.connect(self.run_delete_controller)
+        self.ui.editButton_4.clicked.connect(self.open_modify_dialog)
         self.ui.addButton_4.clicked.connect(self.open_create_dialog)
+        if not self.table_accesses[2]["insert"]:
+            self.ui.addButton_4.setEnabled(False)
+
+        self.ui.deleteButton_5.clicked.connect(self.run_delete_controller)
+        self.ui.editButton_5.clicked.connect(self.open_modify_dialog)
         self.ui.addButton_5.clicked.connect(self.open_create_dialog)
+        if not self.table_accesses[3]["insert"]:
+            self.ui.addButton_5.setEnabled(False)
+
+        self.ui.deleteButton_6.clicked.connect(self.run_delete_controller)
+        self.ui.editButton_6.clicked.connect(self.open_modify_dialog)
         self.ui.addButton_6.clicked.connect(self.open_create_dialog)
+        if not self.table_accesses[4]["insert"]:
+            self.ui.addButton_6.setEnabled(False)
 
 
     def on_tab_changed(self, tab_index: int) -> None:
@@ -108,20 +130,51 @@ class LibraryCataloger(QMainWindow):
     def change_delete_update_button_states(self, selected, deselected):
         match self.ui.tabWidget.currentIndex():
             case 0:
-                self.ui.deleteButton.setEnabled(True)
-                self.ui.editButton.setEnabled(True)
+                if self.table_accesses[0]["delete"]:
+                    self.ui.deleteButton.setEnabled(True)
+                else:
+                    self.ui.deleteButton.setEnabled(False)
+                if self.table_accesses[0]["update"]:
+                    self.ui.editButton.setEnabled(True)
+                else:
+                    self.ui.editButton.setEnabled(False)
             case 1:
-                self.ui.deleteButton_3.setEnabled(True)
-                self.ui.editButton_3.setEnabled(True)
+                if self.table_accesses[1]["delete"]:
+                    self.ui.deleteButton_3.setEnabled(True)
+                else:
+                    self.ui.deleteButton_3.setEnabled(False)
+                if self.table_accesses[1]["update"]:
+                    self.ui.editButton_3.setEnabled(True)
+                else:
+                    self.ui.editButton_3.setEnabled(False)
             case 2:
-                self.ui.deleteButton_4.setEnabled(True)
-                self.ui.editButton_4.setEnabled(True)
+                if self.table_accesses[2]["delete"]:
+                    self.ui.deleteButton_4.setEnabled(True)
+                else:
+                    self.ui.deleteButton_4.setEnabled(False)
+                if self.table_accesses[2]["update"]:
+                    self.ui.editButton_4.setEnabled(True)
+                else:
+                    self.ui.editButton_4.setEnabled(False)
             case 3:
-                self.ui.deleteButton_5.setEnabled(True)
-                self.ui.editButton_5.setEnabled(True)
+                if self.table_accesses[3]["delete"]:
+                    self.ui.deleteButton_5.setEnabled(True)
+                else:
+                    self.ui.deleteButton_5.setEnabled(False)
+                if self.table_accesses[3]["update"]:
+                    self.ui.editButton_5.setEnabled(True)
+                else:
+                    self.ui.editButton_5.setEnabled(False)
             case 4:
-                self.ui.deleteButton_6.setEnabled(True)
-                self.ui.editButton_6.setEnabled(True)
+                if self.table_accesses[4]["delete"]:
+                    self.ui.deleteButton_6.setEnabled(True)
+                else:
+                    self.ui.deleteButton_6.setEnabled(False)
+                if self.table_accesses[4]["update"]:
+                    self.ui.editButton_6.setEnabled(True)
+                else:
+                    self.ui.editButton_6.setEnabled(False)
+                
 
     def run_delete_controller(self):
         match self.ui.tabWidget.currentIndex():

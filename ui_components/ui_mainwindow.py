@@ -107,7 +107,10 @@ class Ui_MainWindow(object):
 "QPushButton:hover {\n"
 "	background-color: rgb(44, 186, 119);\n"
 "}\n"
-"")
+"QPushButton:disabled {\n"
+"	background-color: rgb(154, 153, 150);\n"
+"	color: rgb(61, 61, 61);\n"
+"}")
 
         self.horizontalLayout_2.addWidget(self.addButton)
 
@@ -180,6 +183,10 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(44, 186, 119);\n"
+"}\n"
+"QPushButton:disabled {\n"
+"	background-color: rgb(154, 153, 150);\n"
+"	color: rgb(61, 61, 61);\n"
 "}")
 
         self.horizontalLayout_4.addWidget(self.addButton_3)
@@ -253,6 +260,10 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(44, 186, 119);\n"
+"}\n"
+"QPushButton:disabled {\n"
+"	background-color: rgb(154, 153, 150);\n"
+"	color: rgb(61, 61, 61);\n"
 "}")
 
         self.horizontalLayout_5.addWidget(self.addButton_4)
@@ -326,6 +337,10 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(44, 186, 119);\n"
+"}\n"
+"QPushButton:disabled {\n"
+"	background-color: rgb(154, 153, 150);\n"
+"	color: rgb(61, 61, 61);\n"
 "}")
 
         self.horizontalLayout_6.addWidget(self.addButton_5)
@@ -399,6 +414,10 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {\n"
 "	background-color: rgb(44, 186, 119);\n"
+"}\n"
+"QPushButton:disabled {\n"
+"	background-color: rgb(154, 153, 150);\n"
+"	color: rgb(61, 61, 61);\n"
 "}")
 
         self.horizontalLayout_7.addWidget(self.addButton_6)
@@ -417,7 +436,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(4)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
